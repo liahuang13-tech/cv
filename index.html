@@ -1,0 +1,1154 @@
+<html lang="zh-CN"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简历项目合集 | Lia Huang</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- GSAP 动画库 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#111111',
+                        secondary: '#333333',
+                        accent: '#0066ff',
+                        light: '#f5f5f5',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    transitionProperty: {
+                        'height': 'height',
+                        'spacing': 'margin, padding',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-balance {
+                text-wrap: balance;
+            }
+            .text-shadow {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            }
+            .transition-transform {
+                transition-property: transform;
+                transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+                transition-duration: 300ms;
+            }
+            .hover-scale {
+                @apply hover:scale-105 transition-transform duration-300;
+            }
+            .card-shadow {
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            }
+            .nav-shadow {
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            }
+        }
+    </style>
+    
+    <style>
+        /* 自定义滚动区域的自定义滚动条 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        
+        /* 平滑区域的动画 */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .fade-in.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* 作品卡片悬停效果 */
+        .work-card {
+            transition: all 0.3s ease;
+        }
+        
+        .work-card:hover .work-overlay {
+            opacity: 1;
+        }
+        
+        .work-overlay {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        /* 导航栏滚动效果 */
+        .navbar-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 50;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-white text-primary font-sans">
+    <!-- 导航栏 -->
+    <nav id="navbar" class="navbar-fixed bg-white bg-opacity-95 nav-shadow py-4">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="flex justify-between-between items-center">
+                <a href="#" class="text-2xl font-bold text-primary">Lia Huang</a>
+                
+                <!-- 桌面导航 -->
+                <div class="hidden md:flex ml-auto space-x-8">
+                    <a href="#home" class="text-secondary hover:text-accent transition-colors">Home</a>
+                    <a href="#about" class="text-secondary hover:text-accent transition-colors">About</a>
+                    <a href="#experience" class="text-secondary hover:text-accent transition-colors">Experience</a>
+                    <a href="#projects" class="text-secondary hover:text-accent transition-colors">Projects</a>
+                    <a href="#contact" class="text-secondary hover:text-accent transition-colors">Contact</a>
+                </div>
+                
+                <!-- 移动端菜单按钮 -->
+                <button id="menu-toggle" class="md:hidden ml-auto text-primary focus:outline-none">
+                    <i class="fa fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- 移动端导航菜单 -->
+        <div id="mobile-menu" class="md:hidden bg-white hidden absolute top-full left-0 w-full border-t border-gray-100">
+            <div class="container mx-auto px-4 py-4">
+                <a href="#home" class="block py-2 text-secondary hover:text-accent">Home</a>
+                <a href="#about" class="block py-2 text-secondaryary hover:text-accent">About</a>
+                <a href="#experience" class="block py-2 text-secondaryary hover:text-accent">Experience</a>  
+                <a href="#projects" class="block py-2 text-secondaryary hover:text-accent">Projects</a>
+                <a href="#contact" class="block py-2 text-secondary hover:text-accent">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero 区域 -->
+    <section id="home" class="min-h-screen flex items-center pt-16">
+        <div class="container mx-auto px-4 py-16">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-12">
+                <!-- 左侧文字内容 -->
+                <div class="max-w-3xl md:w-1/2">
+                    <h1 class="text-5xl md:text-7xl font-bold mb-4 leading-tight" style="font-size: 36px;">
+                      Hi, I'm Lia Huang 👋
+                    </h1>
+                  
+                    <h1 class="text-5xl md:text-7xl font-bold mb-4 leading-tight" style="font-size: 36px;">
+                      黄 靓
+                    </h1>
+                  
+                    <p class="text-xl md:text-2xl text-gray-600 mb-8" style="font-size: 14px; line-height: 27px; color: rgb(33, 35, 38); font-weight: bold; font-style: italic;">
+                      专注美妆奢侈品领域 · 10年活动策划执行经验 · 全链路项目管理专家
+                    </p>
+                  
+                    <div class="flex space-x-4">
+                        <a href="#projects" class="px-8 py-3 bg-black text-white font-medium rounded-md hover:bg-gray-800 transition duration-300">
+                            View My Projects
+                        </a>
+                        <a href="#about" class="px-8 py-3 border border-gray-300 text-black font-medium rounded-md hover:bg-gray-100 transition duration-300">
+                            About Me
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- 右侧图片 -->
+                <div class="md:w-2/5 relative">
+                    <div class="aspect-[3/4] rounded-lg overflow-hidden">
+                        <img src="http://my-cv-images.oss-cn-shanghai.aliyuncs.com/image/index/1.jpg" alt="Lia/image" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 关于我区域 -->
+    <section id="about" class="py-24">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-top gap-12">
+                <div class="md:w-1/3">
+                    <div class="relative">
+                        <img src="http://my-cv-images.oss-cn-shanghai.aliyuncs.com/image/index/2.jpg" alt="Lia/image" class="w-full rounded-lg relative z-10">
+                    </div>
+                </div>
+                
+                <div class="md:w-2/3">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">About Me</h2>
+                    <p class="text-gray-600 mb-2 leading-relaxed" style="font-size: 12px;">
+                      -10年+线下活动行业经验（含4A广告公司服务经历），6年总监级管理经验，具备“前端大客户维护 + 中端项目统筹 + 后端团队 / 资源整合” 的全链路能力；
+                    </p>
+                    <p class="text-gray-600 mb-2 leading-relaxed" style="font-size: 12px;">
+                      -深耕美妆/奢侈品/服饰等行业领域，操盘30+头部品牌活动；
+                    </p>
+                    <p class="text-gray-600 mb-2 leading-relaxed" style="font-size: 12px;">
+                      -擅长客户深度运营、风险把控、方案撰写、跨部门/供应商资源整合，成本控制；
+                    </p>
+                    <p class="text-gray-600 mb-2 leading-relaxed" style="font-size: 12px;">
+                      -带领团队搭建高效执行体系，以结果为导向为公司创造持续业务增长；
+                    </p>
+                    <p class="text-gray-600 mb-2 leading-relaxed" style="font-size: 12px;">
+                      -了解行业市场，有较强的全局思维、分析判断能力，使用AI工具提升效率，能承受较大的工作压力；
+                    </p>
+                    <p class="text-gray-600 mb-6 leading-relaxed" style="font-size: 12px;">
+                      -项目类型包括：品牌快闪、演唱会、发布秀/会、经销商大会、商业体活动等
+                    </p>
+    
+                    
+                    <!-- 服务客户 -->
+                    <div class="mt-8 mb-14">
+                        <h3 class="text-xl font-semibold mb-6">SKILLS</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-4 py-2 bg-gray-100 rounded-full text-sm">大客户维护</span>
+                            <span class="px-4 py-2 bg-gray-100 rounded-full text-sm">项目统筹</span>
+                            <span class="px-4 py-2 bg-gray-100 rounded-full text-sm">创意策划</span>
+                            <span class="px-4 py-2 bg-gray-100 rounded-full text-sm">风险把控</span>
+                            <span class="px-4 py-2 bg-gray-100 rounded-full text-sm">供应商整合</span>
+                            <span class="px-4 py-2 bg-gray-100 rounded-full text-sm">跨部门写作</span>
+                            <span class="px-4 py-2 bg-gray-100 rounded-full text-sm">团队管理</span>
+                            <span class="px-4 py-2 bg-gray-100 rounded-full text-sm">方案撰写</span>
+                            <span class="px-4 py-2 bg-gray-100 rounded-full text-sm">成本控制</span>
+                            <span class="px-4 py-2 bg-gray-100 rounded-full text-sm">数据分析</span>
+                            <span class="px-4 py-2 bg-gray-100 rounded-full text-sm">AI工具应用</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 经验和教育 -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- 教育 -->
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4">EDUCATION</h3>
+                            <div class="space-y-6">
+                                <div>
+                                    <h4 class="font-medium" style="font-size: 14px;">集美大学诚毅学院</h4>
+                                    <p class="text-gray-600 text-sm">食品科学与工程</p>
+                                    <p class="text-gray-500 text-xs" style="font-size: 14px; line-height: 36px; color: rgb(141, 145, 153);">2009 - 2013</p>
+                                </div>                                
+                            </div>
+                        </div>
+                    </div>
+
+
+                  
+                    <!-- 服务客户 -->
+                    <div class="mt-8 mb-14">
+                        <h3 class="text-xl font-semibold mb-6">CLIENTS</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-4 py-2 bg-gray-100 rounded-full text-sm">CHANEL</span>
+                            <span class="px-4 py-2 bg-gray-100 rounded-full text-sm">DIOR</span>
+                            <span class="px-4 py-2 bg-gray-100 rounded-full text-sm">LANCÔME</span>
+                            <span class="px-4 py-2 bg-gray-100 rounded-full text-sm">ESTÉE LAUDER </span>
+                            <span class="px-4 py-2 bg-gray-100 rounded-full text-sm">YSL</span>
+                            <span class="px-4 py-2 bg-gray-100 rounded-full text-sm">KERING EYEWEAR</span>
+                            <span class="px-4 py-2 bg-gray-100 rounded-full text-sm">ERDOS</span>
+                            <span class="px-4 py-2 bg-gray-100 rounded-full text-sm">DESCENTE</span>
+                            <span class="px-4 py-2 bg-gray-100 rounded-full text-sm">FILA</span>
+                            <span class="px-4 py-2 bg-gray-100 rounded-full text-sm">MISSIONI</span>
+                            <span class="px-4 py-2 bg-gray-100 rounded-full text-sm">ROOKIE</span>
+                            <span class="px-4 py-2 bg-gray-100 rounded-full text-sm">雪歌 </span>
+                        </div>
+                    </div>        
+                </div>
+            </div>
+        </div>
+    </section>
+
+  <!-- 新赠经验区域 -->
+    <section id="experience" class="py-2">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold mb-16">EXPERIENCE
+</h2>
+                      
+          <!-- 时间轴容器 -->
+                  <div class="relative">
+          <!-- 垂直时间线 -->
+                  <div class="absolute left-[11px] top-0 bottom-0 w-0.5 bg-lime-400"></div>
+
+<!-- 第一份工作经历 -->
+                   <div class="relative pl-10 mb-12">
+          <!-- 时间点圆点 -->
+                   <div class="absolute left-0 top-1 w-6 h-6 rounded-full border-4 border-lime-400 bg-white"></div>
+      
+          <!-- 头部信息 -->
+                   <div class="flex flex-col md:flex-row md:items-center justify-between mb-2">
+                   <h2 class="font-medium" style="font-size: 16px;">上海迪琨广告（集团）有限公司</h2>
+                   <span class="text-gray-500 text-xs" style="font-size: 14px; line-height: 36px; color: rgb(141, 145, 153);">2024.5 - 2025.10</span>
+                   </div>
+      
+         <!-- 职位 -->
+                   <p class="text-gray-800 text-sm" style="font-size: 14px; line-height: 24px; font-weight: bold;margin: 0 0 12px 0;">AAD </p>
+      
+         <!-- 职责列表 -->
+                   <ul class="space-y-2 text-gray-700">
+                   <li class="flex items-start">
+                   <span class="text-gray-600 mb-3 leading-relaxed" style="font-size: 12px;"></span>
+                   <span style="font-size: 12px; line-height: 20px;">-深度维护LANCOME、ESTEE LAUDER、YSL、DIOR、KERING EYEWEAR等15+核心客户；</span>
+                   </li>
+                   <li class="flex items-start">
+                   <span class="text-gray-600 mb-3 leading-relaxed" style="font-size: 12px;"></span>
+                   <span style="font-size: 12px; line-height: 20px;">-主导5+千万级预算项目统筹，搭建"风险评估 + 应急预案"体系，项目按期交付率100%，客户满意度95%+；</span>
+                   </li>
+                  <li class="flex items-start">
+                  <span class="text-gray-600 mb-3 leading-relaxed" style="font-size: 12px;"></span>
+                  <span style="font-size: 12px; line-height: 20px;">-带领6人团队，明确分工与考核标准，提升专业能力与服务效率；</span>
+                  </li>
+                  <li class="flex items-start">
+                  <span class="text-gray-600 mb-3 leading-relaxed" style="font-size: 12px;"></span>
+                  <span style="font-size: 12px; line-height: 20px;">-主导项目创意方向与设计把控，打造LAN CNY（预算2000万）、TR EL CNY（预算1000万）、TR YSL BLC（预算500万）等标杆案例；</span>
+                  </li>
+                   </ul>
+                   </div>
+                    
+<!-- 第二份工作经历 -->
+                   <div class="relative pl-10 mb-12">
+          <!-- 时间点圆点 -->
+                   <div class="absolute left-0 top-1 w-6 h-6 rounded-full border-4 border-lime-400 bg-white"></div>
+      
+          <!-- 头部信息 -->
+                   <div class="flex flex-col md:flex-row md:items-center justify-between mb-2">
+                   <h2 class="font-medium" style="font-size: 16px;">上海华扬时尚数字技术有限公司</h2>
+                   <span class="text-gray-500 text-xs" style="font-size: 14px; line-height: 36px; color: rgb(141, 145, 153);">2019.7-2024.5</span>
+                   </div>
+      
+         <!-- 职位 -->
+                   <p class="text-gray-800 text-sm" style="font-size: 14px; line-height: 24px; font-weight: bold;margin: 0 0 12px 0;">SAM-AAD </p>
+      
+         <!-- 职责列表 -->
+                   <ul class="space-y-2 text-gray-700">
+                   <li class="flex items-start">
+                   <span class="text-gray-600 mb-3 leading-relaxed" style="font-size: 12px;"></span>
+                   <span style="font-size: 12px; line-height: 20px;">-主导 Event 项目策略策划与统筹执行，完成 CHANEL、MYTHERESA、鄂尔多斯、德龙等品牌 10 + 项目方案撰写；</span>
+                   </li>
+                   <li class="flex items-start">
+                   <span class="text-gray-600 mb-3 leading-relaxed" style="font-size: 12px;"></span>
+                   <span style="font-size: 12px; line-height: 20px;">-统筹 IP 项目‘数字时尚盛典’运营，把控预算与协调5+合作方资源；</span>
+                   </li>
+                  <li class="flex items-start">
+                  <span class="text-gray-600 mb-3 leading-relaxed" style="font-size: 12px;"></span>
+                  <span style="font-size: 12px; line-height: 20px;">-带领6人团队，组织专业培训（涵盖线下活动方案撰写、风险把控），培养2名核心项目经理;</span>
+                  </li>
+                  <li class="flex items-start">
+                  <span class="text-gray-600 mb-3 leading-relaxed" style="font-size: 12px;"></span>
+                  <span style="font-size: 12px; line-height: 20px;">-建立项目成本管控体系，通过供应商整合及流程优化，降低成本;</span>
+                  </li>
+                   </ul>
+                   </div>
+<!-- 第三份工作经历 -->
+                   <div class="relative pl-10 mb-12">
+          <!-- 时间点圆点 -->
+                   <div class="absolute left-0 top-1 w-6 h-6 rounded-full border-4 border-lime-400 bg-white"></div>
+      
+          <!-- 头部信息 -->
+                   <div class="flex flex-col md:flex-row md:items-center justify-between mb-2">
+                   <h2 class="font-medium" style="font-size: 16px;">厦门多想互动文化传播股份有限公司</h2>
+                   <span class="text-gray-500 text-xs" style="font-size: 14px; line-height: 36px; color: rgb(141, 145, 153);">2016.09-2019.05</span>
+                   </div>
+      
+         <!-- 职位 -->
+                   <p class="text-gray-800 text-sm" style="font-size: 14px; line-height: 24px; font-weight: bold;margin: 0 0 12px 0;">项目经理-项目总监 </p>
+      
+         <!-- 职责列表 -->
+                   <ul class="space-y-2 text-gray-700">
+                   <li class="flex items-start">
+                   <span class="text-gray-600 mb-3 leading-relaxed" style="font-size: 12px;"></span>
+                   <span style="font-size: 12px; line-height: 20px;">-统筹雪歌、柒牌、FILA、厦门时尚周等20+品牌项目，覆盖客户对接、预算成本拟定、方案策划、政府报批、现场执行到结案全链路，项目按期交付、客户按一度98%+；</span>
+                   </li>
+                   <li class="flex items-start">
+                   <span class="text-gray-600 mb-3 leading-relaxed" style="font-size: 12px;"></span>
+                   <span style="font-size: 12px; line-height: 20px;">-担任舞台执行编导，协助导演完成舞美创意、音乐制作、灯光编排等工作；</span>
+                   </li>
+                  <li class="flex items-start">
+                  <span class="text-gray-600 mb-3 leading-relaxed" style="font-size: 12px;"></span>
+                  <span style="font-size: 12px; line-height: 20px;">-洽谈电商/音乐平台、新锐设计师20+合作资源，纳入公司核心资源库，为项目新增异业联动曝光</span>
+                  </li>
+                  <li class="flex items-start">
+                  <span class="text-gray-600 mb-3 leading-relaxed" style="font-size: 12px;"></span>
+                  <span style="font-size: 12px; line-height: 20px;">-建立成本管控与风险预案机制，重大风险事件发生率为0;</span>
+                  </li>
+                   </ul>
+                   </div>
+<!-- 第四份工作经历 -->
+                   <div class="relative pl-10 mb-12">
+          <!-- 时间点圆点 -->
+                   <div class="absolute left-0 top-1 w-6 h-6 rounded-full border-4 border-lime-400 bg-white"></div>
+      
+          <!-- 头部信息 -->
+                   <div class="flex flex-col md:flex-row md:items-center justify-between mb-2">
+                   <h2 class="font-medium" style="font-size: 16px;">厦门融坤商贸发展有限公司（中华城SHOPPING MALL）</h2>
+                   <span class="text-gray-500 text-xs" style="font-size: 14px; line-height: 36px; color: rgb(141, 145, 153);">2015.09-2016.09</span>
+                   </div>
+      
+         <!-- 职位 -->
+                   <p class="text-gray-800 text-sm" style="font-size: 14px; line-height: 24px; font-weight: bold;margin: 0 0 12px 0;">企划经理 </p>
+      
+         <!-- 职责列表 -->
+                   <ul class="space-y-2 text-gray-700">
+                   <li class="flex items-start">
+                   <span class="text-gray-600 mb-3 leading-relaxed" style="font-size: 12px;"></span>
+                   <span style="font-size: 12px; line-height: 20px;">-主导中华城北区2016年度营销企划大纲撰写，制定6场主题活动排期，通过“节点营销+场景创新”策略，实现北区月均客流增长10%；</span>
+                   </li>
+                   <li class="flex items-start">
+                   <span class="text-gray-600 mb-3 leading-relaxed" style="font-size: 12px;"></span>
+                   <span style="font-size: 12px; line-height: 20px;">-统筹北区新街区开业营销活动（包含SP促销、线下活动、场景布置、自媒体推广及撰写）；</span>
+                   </li>
+                  <li class="flex items-start">
+                  <span class="text-gray-600 mb-3 leading-relaxed" style="font-size: 12px;"></span>
+                  <span style="font-size: 12px; line-height: 20px;">-洽谈并落地异业活动及品牌活动，联动合作方提高商场客流及品牌销售，使其保持增长；</span>
+                  </li>
+                  <li class="flex items-start">
+                  <span class="text-gray-600 mb-3 leading-relaxed" style="font-size: 12px;"></span>
+                  <span style="font-size: 12px; line-height: 20px;">-完成2015年度经营数据（营业额、人流量、收支）分析，撰写月度总结报告，为后续企划调整提供数据支撑；</span>
+                  </li>
+                   </ul>
+                   </div>
+
+<!-- 第五份工作经历 -->
+                   <div class="relative pl-10 mb-12">
+          <!-- 时间点圆点 -->
+                   <div class="absolute left-0 top-1 w-6 h-6 rounded-full border-4 border-lime-400 bg-white"></div>
+      
+          <!-- 头部信息 -->
+                   <div class="flex flex-col md:flex-row md:items-center justify-between mb-2">
+                   <h2 class="font-medium" style="font-size: 16px;">厦门多想互动文化传播股份有限公司</h2>
+                   <span class="text-gray-500 text-xs" style="font-size: 14px; line-height: 36px; color: rgb(141, 145, 153);">2012.09-2015.08</span>
+                   </div>
+      
+         <!-- 职位 -->
+                   <p class="text-gray-800 text-sm" style="font-size: 14px; line-height: 24px; font-weight: bold;margin: 0 0 12px 0;">采购经理 </p>
+      
+         <!-- 职责列表 -->
+                   <ul class="space-y-2 text-gray-700">
+                   <li class="flex items-start">
+                   <span class="text-gray-600 mb-3 leading-relaxed" style="font-size: 12px;"></span>
+                   <span style="font-size: 12px; line-height: 20px;">-走访并拓展50+优质供应商（含物料、搭建、演艺、媒体类），完成年度合作价格洽谈及合作框架，保障90%以上项目的资源供给；</span>
+                   </li>
+                   <li class="flex items-start">
+                   <span class="text-gray-600 mb-3 leading-relaxed" style="font-size: 12px;"></span>
+                   <span style="font-size: 12px; line-height: 20px;">-协助完善OA系统供应商管理模块，制定标准化采购流程，提升供应商审核效率；</span>
+                   </li>
+                  <li class="flex items-start">
+                  <span class="text-gray-600 mb-3 leading-relaxed" style="font-size: 12px;"></span>
+                  <span style="font-size: 12px; line-height: 20px;">-统筹公司内部采购、项目供应商采购等全品类采购工作，完成30+项目的成本评估与商务谈判；</span>
+                  </li>
+                  <li class="flex items-start">
+                  <span class="text-gray-600 mb-3 leading-relaxed" style="font-size: 12px;"></span>
+                  <span style="font-size: 12px; line-height: 20px;">-配合财务/审计完成年度供应商核算，制定排款计划;</span>
+                  </li>
+                  <li class="flex items-start">
+                  <span class="text-gray-600 mb-3 leading-relaxed" style="font-size: 12px;"></span>
+                  <span style="font-size: 12px; line-height: 20px;">-展50+艺人资源（含商业演出、广告代言类），完成15+项目的资源签约与执行；</span>
+                  </li>
+                   </ul>
+                   </div>
+          </div>
+        </div>
+     </section>
+
+
+      <!-- 作品展示区 -->
+    <section id="projects" class="py-24 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold mb-16 text-center">PROJECTS
+</h2>
+
+            <!-- 作品网格 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+              <!-- 作品1 -->
+                <div class="work-card bg-white rounded-lg overflow-hidden shadow-sm group" data-category="UI/UX">
+                    <div class="relative overflow-hidden">
+                        <img src="http://my-cv-images.oss-cn-shanghai.aliyuncs.com/image/index/work1.jpg" alt="Lia/image" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                        </div>
+                    </div>
+                  
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold" style="font-size: 16px;">
+                          2025 ESTÉE LAUDER
+                         </h3>
+                        <h3 class="text-xl font-semibold mb-2" style="font-size: 16px;">
+                          NIGHT SKIN SCIENCE CENTER 
+                        </h3>
+                      
+                        <p class="text-gray-600 text-sm" style="font-size: 12px;">
+                          雅诗兰黛「夜间肌肤科学中心」快闪店项目，落地三亚CDF免税城，聚焦夜间护肤场景，结合沉浸式体验与产品展示，打造品牌线下营销新场景。
+                        </p>
+                        <p class="text-gray-600 text-sm mb-4" style="font-size: 12px;">
+                          完成从创意设计、消费者动线、互动转化到落地执行的项目统筹，与异业品牌合作完成导流，提升到店转化。
+                        </p>
+                      
+                        <div class="flex justify-between items-center">
+                            <div class="px-4 py-2 bg-gray-100 rounded-full text-sm">POP-UP</div>
+                            <a href="works/work1 EL ANR.html" class="text-accent text-sm font-medium hover:underline">View Project</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 作品2 -->
+                <div class="work-card bg-white rounded-lg overflow-hidden shadow-sm group" data-category="Web Design">
+                    <div class="relative overflow-hidden">
+                        <img src="http://my-cv-images.oss-cn-shanghai.aliyuncs.com/image/index/work2.jpg" alt="Lia/image" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100"> 
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold" style="font-size: 16px;">
+                          2024/2025 KERING EYEWEAR
+                        </h3>
+                        <h3 class="text-xl font-semibold mb-2" style="font-size: 16px;">
+                          系列鉴赏会
+                        </h3>
+                        <p class="text-gray-600 text-sm" style="font-size: 12px;">
+                          服务开云眼镜旗下品牌，面向渠道伙伴与核心客户，统筹北京（春夏）/ 上海（秋冬）系列鉴赏会。
+                        </p>
+                        <p class="text-gray-600 text-sm mb-4" style="font-size: 12px;">
+                          全流程把控场地设计、人员服务与现场执行，打造专业高端的品牌品鉴场景，提升客户体验，助力新品推广与业务合作。
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <div class="px-4 py-2 bg-gray-100 rounded-full text-sm">EXHIBITION</div>
+                            <a href="works/work2 KERING.html" class="text-accent text-sm font-medium hover:underline">View Project</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 作品3 -->
+                <div class="work-card bg-white rounded-lg overflow-hidden shadow-sm group" data-category="Branding">
+                    <div class="relative overflow-hidden">
+                        <img src="http://my-cv-images.oss-cn-shanghai.aliyuncs.com/image/index/work3.png" alt="Lia/image" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100"></div>
+                        </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2" style="font-size: 16px;">
+                          2025 LANCÔME 新春美运游园会
+                        </h3>
+                        <p class="text-gray-600 text-sm" style="font-size: 12px;">
+                          主导 27 城新春快闪全项目链路，从创意设计、投标提案到全国多城落地执行。
+                        </p>
+                        <p class="text-gray-600 text-sm mb-4" style="font-size: 12px;">
+                          以「游园会」为载体，统筹视觉、空间、运营及供应链协同，打造品牌新春沉浸式体验场景，强化节日情感连接，助力线下客流与产品转化双提升。
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <div class="px-4 py-2 bg-gray-100 rounded-full text-sm">POP-UP</div>
+                            <a href="works/work3 LAN CNY.html" class="text-accent text-sm font-medium hover:underline">View Project</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 作品4 -->
+                <div class="work-card bg-white rounded-lg overflow-hidden shadow-sm group" data-category="Product Design">
+                    <div class="relative overflow-hidden">
+                        <img src="http://my-cv-images.oss-cn-shanghai.aliyuncs.com/image/index/work4.jpg" alt="Lia/image" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2" style="font-size: 16px;">
+                          2025 YSL BEAUTY LIGHT CLUB
+                        </h3>
+                        <p class="text-gray-600 text-sm" style="font-size: 12px;">
+                          主导 1 HPP + 3 OUTPOST 跨境创意落地，打破空间限制，通过场景动线与感官体验提升品牌销量与消费者粘性，实现高端美妆线下场景的跨境标准化复制。
+                        </p>
+                        <p class="text-gray-600 text-sm mb-4" style="font-size: 12px;">
+                          优化用户体验路径，提升到店转化，实现品牌声量与销量双增长。
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <div class="px-4 py-2 bg-gray-100 rounded-full text-sm">POP-UP</div>
+                            <a href="works/work4 YEL LIGHT.html" class="text-accent text-sm font-medium hover:underline">View Project</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 作品5 -->
+                <div class="work-card bg-white rounded-lg overflow-hidden shadow-sm group" data-category="UX Research">
+                    <div class="relative overflow-hidden">
+                        <img src="http://my-cv-images.oss-cn-shanghai.aliyuncs.com/image/index/work5.jpg" alt="Lia/image" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2" style="font-size: 16px;">
+                          2025 MAYBACH家族尊享之旅
+                        </h3>
+                        <p class="text-gray-600 text-sm mb-4" style="font-size: 12px;">
+                          统筹梅赛德斯 - 迈巴赫高净值客户专属体验活动，负责从场景甄选、主题氛围营造到全流程 VIP 服务的精细化管理；
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <div class="px-4 py-2 bg-gray-100 rounded-full text-sm">VIP EVENT</div>
+                            <a href="works/work5 MAYBACH.html" class="text-accent text-sm font-medium hover:underline">View Project</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 作品6 -->
+                <div class="work-card bg-white rounded-lg overflow-hidden shadow-sm group" data-category="3D Design">
+                    <div class="relative overflow-hidden">
+                        <img src="http://my-cv-images.oss-cn-shanghai.aliyuncs.com/image/index/work6.jpg" alt="Lia/image" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2" style="font-size: 16px;">
+                          2024 梅赛德斯-奔驰梦想车型主题活动
+                        </h3>
+                        <p class="text-gray-600 text-sm mb-4" style="font-size: 12px;">
+                          统筹奔驰梦想车型系列线下主题活动，打造年轻化、潮流化的品牌体验场景，通过城市地标联动与沉浸式互动，高效传递车型卖点。
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <div class="px-4 py-2 bg-gray-100 rounded-full text-sm">PR EVENT</div>
+                            <a href="works/work6 B.html" class="text-accent text-sm font-medium hover:underline">View Project</a>
+                        </div>
+                    </div>
+                </div>
+
+               <!-- 作品7 -->
+                <div class="work-card bg-white rounded-lg overflow-hidden shadow-sm group" data-category="UI/UX">
+                    <div class="relative overflow-hidden">
+                        <img src="http://my-cv-images.oss-cn-shanghai.aliyuncs.com/image/index/work7.png" alt="Lia/image" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                        </div>
+                    </div>
+                  
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2" style="font-size: 16px;">
+                          2024 ESTÉE LAUDER POWER CAMPAIGN
+                        </h3>
+                      
+                        <p class="text-gray-600 text-sm" style="font-size: 12px;">
+                          以「礼遇美魔法」为核心创意，统筹雅诗兰黛 2024 年度核心营销战役。
+                        </p>
+                        <p class="text-gray-600 text-sm mb-4" style="font-size: 12px;">
+                          从沉浸式快闪店打造、VIP 私享沙龙运营，到异业资源联动、门店活动落地，全链路操盘创意与执行，最终助力品牌实现免税美妆品类财年销售第一，实现业绩里程碑式突破。
+                        </p>
+                      
+                        <div class="flex justify-between items-center">
+                            <div class="px-4 py-2 bg-gray-100 rounded-full text-sm">POP-UP</div>
+                            <a href="works/work7 EL POWER.html" class="text-accent text-sm font-medium hover:underline">View Project</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 作品8 -->
+                <div class="work-card bg-white rounded-lg overflow-hidden shadow-sm group" data-category="Web Design">
+                    <div class="relative overflow-hidden">
+                        <img src="http://my-cv-images.oss-cn-shanghai.aliyuncs.com/image/index/work8.png" alt="Lia/image" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2" style="font-size: 16px;">
+                          2024 LANCÔME DRAMA OUTPOST
+                        </h3>
+                        <p class="text-gray-600 text-sm" style="font-size: 12px;">
+                          23 城全国快闪统筹，从巨型口红装置、阶梯式红场等多形态展台创意设计，到全国多城落地执行。
+                       </p>
+                        <p class="text-gray-600 text-sm mb-4" style="font-size: 12px;">
+                          打造 #296 口红专属沉浸式体验空间，以极致视觉冲击与创意展台设计，助力新品成为年度现象级美妆爆款。
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <div class="px-4 py-2 bg-gray-100 rounded-full text-sm">POP-UP</div>
+                            <a href="works/work8 LAN DRAMA.html" class="text-accent text-sm font-medium hover:underline">View Project</a>
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- 作品9 -->
+                <div class="work-card bg-white rounded-lg overflow-hidden shadow-sm group" data-category="Web Design">
+                    <div class="relative overflow-hidden">
+                        <img src="http://my-cv-images.oss-cn-shanghai.aliyuncs.com/image/index/work9.jpg" alt="Lia/image" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100"></div>
+                        </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2" style="font-size: 16px;">
+                          2019-2024 CHANEL VIP EVENT 奢华驻颜之旅尊享会
+                        </h3>
+                        <p class="text-gray-600 text-sm" style="font-size: 12px;">
+                          统筹并执行CHANEL 2019-2024 全年40+VIP私享会，多线标准化流程及周期性项目运营流程管理；
+                        </p>
+                        <p class="text-gray-600 text-sm mb-4" style="font-size: 12px;">
+                          从空间设计、服务流程优化到品质把控，不断升级项目管理和客户体验，打造沉浸式高端体验场景，助力品牌高净值客户忠诚度与复购率双提升。
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <div class="px-4 py-2 bg-gray-100 rounded-full text-sm">VIP EVENT</div>
+                            <a href="works/work9 CHANEL VIP.html" class="text-accent text-sm font-medium hover:underline">View Project</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 作品10 -->
+                <div class="work-card bg-white rounded-lg overflow-hidden shadow-sm group" data-category="Web Design">
+                    <div class="relative overflow-hidden">
+                        <img src="http://my-cv-images.oss-cn-shanghai.aliyuncs.com/image/index/work10.JPG" alt="Modern Website Design" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2" style="font-size: 16px;">
+                         2022 CHANEL FACTOTY 5 POP-UP
+                        </h3>
+                        <p class="text-gray-600 text-sm" style="font-size: 12px;">
+                          主导为期 1 个月的线下快闪店运营管理，统筹 48 人次现场人力团队，搭建标准化培训、彩排、每日数据监控与例会机制；
+                        </p>
+                        <p class="text-gray-600 text-sm mb-4" style="font-size: 12px;"> 
+                          全链路把控客户体验互动流程，通过精细化运营，达成品牌打卡互动与销售转化目标，打造高质感高端美妆线下体验标杆。
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <div class="px-4 py-2 bg-gray-100 rounded-full text-sm">POP-UP</div>
+                            <a href="works/work10 CHANEL POPUP.html" class="text-accent text-sm font-medium hover:underline">View Project</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 作品11 -->
+                <div class="work-card bg-white rounded-lg overflow-hidden shadow-sm group" data-category="Web Design">
+                    <div class="relative overflow-hidden">
+                        <img src="http://my-cv-images.oss-cn-shanghai.aliyuncs.com/image/index/work11.jpg" alt="Lia/image" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100"></div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2" style="font-size: 16px;">
+                         2021 DESCENTE BLACK CARD VIP EVENT
+                        </h3>
+                        <p class="text-gray-600 text-sm" style="font-size: 12px;">
+                          统筹高端运动品牌迪桑特黑卡会员专属晚宴，负责从场景设计、氛围营造到 VIP 体验全流程管理；
+                        </p>
+                        <p class="text-gray-600 text-sm mb-4" style="font-size: 12px;"> 
+                          以 “高端质感 + 品牌调性” 为核心，打造沉浸式运动生活方式体验，强化高净值会员的品牌归属感与忠诚度，助力客户关系深度维护。
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <div class="px-4 py-2 bg-gray-100 rounded-full text-sm">VIP EVENT</div>
+                            <a href="works/work11 DESCENTE.html" class="text-accent text-sm font-medium hover:underline">View Project</a>
+                        </div>
+                    </div>
+                </div>  
+
+                <!-- 作品12 -->
+                <div class="work-card bg-white rounded-lg overflow-hidden shadow-sm group" data-category="Web Design">
+                    <div class="relative overflow-hidden">
+                        <img src="http://my-cv-images.oss-cn-shanghai.aliyuncs.com/image/index/work12.JPG" alt="Lia/image" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2" style="font-size: 16px;">
+                         2020 MYTHERESA KOL EVENT
+                        </h3>
+                        <p class="text-gray-600 text-sm" style="font-size: 12px;">
+                          统筹国际奢侈品电商 MYTHERESA 线下 KOL 活动，邀请 40 位时尚垂类 KOL 参与新季服饰配饰种草；
+                        </p>
+                        <p class="text-gray-600 text-sm mb-4" style="font-size: 12px;"> 
+                          打造沉浸式时尚场景，高效联动线上内容传播与私域引流，助力奢侈品电商在国内市场的用户渗透。
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <div class="px-4 py-2 bg-gray-100 rounded-full text-sm">KOL EVENT</div>
+                            <a href="works/work12 MYTHERESA.html" class="text-accent text-sm font-medium hover:underline">View Project</a>
+                        </div>
+                    </div>
+                </div>  
+
+                <!-- 作品13 -->
+                <div class="work-card bg-white rounded-lg overflow-hidden shadow-sm group" data-category="Web Design">
+                    <div class="relative overflow-hidden">
+                        <img src="http://my-cv-images.oss-cn-shanghai.aliyuncs.com/image/index/work13.jpg" alt="Modern Website Design" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2" style="font-size: 16px;">
+                         2018澳门国际时尚周
+                        </h3>
+                        <p class="text-gray-600 text-sm" style="font-size: 12px;">
+                          统筹澳门国际时尚周开闭幕式及多场国际设计师品牌发布秀，从启动仪式、秀场执行到闭幕慈善晚宴，全流程把控落地细节；
+                        </p>
+                        <p class="text-gray-600 text-sm mb-4" style="font-size: 12px;"> 
+                          以专业执行与资源整合，打造兼具行业影响力与城市文化价值的时尚 IP 活动，助力澳门国际时尚产业的传播与发展。
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <div class="px-4 py-2 bg-gray-100 rounded-full text-sm">FASHION SHOW</div>
+                            <a href="works/work13 MACAO.html" class="text-accent text-sm font-medium hover:underline">View Project</a>
+                        </div>
+                    </div>
+                </div>  
+
+                <!-- 作品14 -->
+                <div class="work-card bg-white rounded-lg overflow-hidden shadow-sm group" data-category="Web Design">
+                    <div class="relative overflow-hidden">
+                        <img src="http://my-cv-images.oss-cn-shanghai.aliyuncs.com/image/index/wori14.JPG" alt="Lia/image" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2" style="font-size: 16px;">
+                         2016-2018厦门国际时尚周
+                        </h3>
+                        <p class="text-gray-600 text-sm" style="font-size: 12px;">
+                          连续三年厦门国际时尚周核心统筹，统筹开幕式、新锐设计师发布秀、品牌发布汇等近 50 场时尚活动，打造福建地区顶级时尚 IP；
+                        </p>
+                        <p class="text-gray-600 text-sm mb-4" style="font-size: 12px;"> 
+                          主导品牌合作洽谈、艺人 / 模特资源整合、团队管理与预算管控，实现线上线下流量联动，助力时尚周成为兼具行业影响力与商业价值的标杆项目。
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <div class="px-4 py-2 bg-gray-100 rounded-full text-sm">FASHION SHOW</div>
+                            <a href="works/work14 XM.html" class="text-accent text-sm font-medium hover:underline">View Project</a>
+                        </div>
+                    </div>
+                </div>  
+
+                <!-- 作品15 -->
+                <div class="work-card bg-white rounded-lg overflow-hidden shadow-sm group" data-category="Web Design">
+                    <div class="relative overflow-hidden">
+                        <img src="http://my-cv-images.oss-cn-shanghai.aliyuncs.com/image/index/work15.png" alt="Lia/image" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2" style="font-size: 16px;">
+                         OTHER CASES-POP-UP STORE
+                        </h3>
+                        <p class="text-gray-600 text-sm" style="font-size: 12px;">
+                          主导多品牌快闪店从创意落地到运营转化的全流程统筹，打造高质感、高传播度的线下沉浸式体验空间；
+                        </p>
+                        <p class="text-gray-600 text-sm mb-4" style="font-size: 12px;"> 
+                          从空间设计、视觉呈现到现场运营管理，精细化把控每一处细节，为品牌创造独特沉浸式体验与高效消费者互动场景，强化品牌记忆点与用户深度连接。
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <div class="px-4 py-2 bg-gray-100 rounded-full text-sm">POP-UP</div>
+                            <a href="works/work15 OTHER POPUP.html" class="text-accent text-sm font-medium hover:underline">View Project</a>
+                        </div>
+                    </div>
+                </div>  
+
+                <!-- 作品16 -->
+                <div class="work-card bg-white rounded-lg overflow-hidden shadow-sm group" data-category="Web Design">
+                    <div class="relative overflow-hidden">
+                        <img src="http://my-cv-images.oss-cn-shanghai.aliyuncs.com/image/index/work16.png" alt="Lia/image" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2" style="font-size: 16px;">
+                         OTHER CASES-FASHION SHOW
+                        </h3>
+                        <p class="text-gray-600 text-sm" style="font-size: 12px;">
+                          主导多时尚品牌时装秀全流程统筹，打造兼具艺术表达与品牌价值的时装发布秀。
+                        </p>
+                        <p class="text-gray-600 text-sm mb-4" style="font-size: 12px;"> 
+                          从场景创意、模特甄选到视听呈现，精细化把控每一处细节，高效传递品牌最新系列与设计理念，为品牌塑造极具记忆点的时尚表达。
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <div class="px-4 py-2 bg-gray-100 rounded-full text-sm">FASHION SHOWP</div>
+                            <a href="works/work16 OTHER SHOW.html" class="text-accent text-sm font-medium hover:underline">View Project</a>
+                        </div>
+                    </div>
+                </div>  
+
+                <!-- 作品17 -->
+                <div class="work-card bg-white rounded-lg overflow-hidden shadow-sm group" data-category="Web Design">
+                    <div class="relative overflow-hidden">
+                        <img src="http://my-cv-images.oss-cn-shanghai.aliyuncs.com/image/index/work17.JPG" alt="Lia/image" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100"></div>
+                        </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2" style="font-size: 16px;">
+                         OTHER CASES-MARKETING EVENT
+                        </h3>
+                        <p class="text-gray-600 text-sm" style="font-size: 12px;">
+                          统筹各品牌的场景营销活动及运营，打造兼具专业质感与目标达成力的品牌场景。
+                        </p>
+                        <p class="text-gray-600 text-sm mb-4" style="font-size: 12px;"> 
+                          从活动策划、流程设计到现场执行，把控每一处细节，确保品牌年会、经销商发布会、新品发布等各类活动零失误落地，高效助力品牌实现价值传播与业务目标。
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <div class="px-4 py-2 bg-gray-100 rounded-full text-sm">EVENT</div>
+                            <a href="works/work17 OTHER EVENT.html" class="text-accent text-sm font-medium hover:underline">View Project</a>
+                        </div>
+                    </div>
+                </div> 
+
+              
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系方式区域 -->
+    <section id="contact" class="py-24 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-center">CONTACT</h2>
+            <div class="flex flex-col lg:flex-col gap-12"> 
+
+  <!-- 联系方式列表 -->   
+  <div class="w-full max-w-md mx-auto space-y-1 py-2">
+  <div class="text-gray-600 flex flex-col items-center">
+
+    <!-- 电话 -->
+    <div class="flex items-center gap-3 leading-12">
+      <svg class="w-5 h-5 text-gray-800 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+      </svg>
+      <span class="text-base font-medium leading-relaxed">+86 137-9977-3801</span>
+    </div>
+
+    <!-- 邮箱 -->
+    <div class="flex items-center gap-3 leading-12">
+      <svg class="w-5 h-5 text-gray-800 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+      </svg>
+      <span class="text-base font-medium leading-relaxed">huangliang13@qq.com</span>
+    </div>
+
+    <!-- 地址 -->
+    <div class="flex items-center gap-3 leading-12">
+      <svg class="w-5 h-5 text-gray-800 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+      </svg>
+      <span class="text-base font-medium leading-relaxed">上海, 中国</span>
+    </div>
+  </div>
+</div>
+    
+                <!-- 右侧联系表单 -->
+                <div class="mx-auto px-4">
+                    <div class="bg-white p-8 rounded-lg shadow-sm">
+                        <h3 class="text-2xl text-center font-semibold mb-6">Send Me a Message</h3>
+                        
+                        <form id="contact-form" class="space-y-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                                    <input type="text" id="name" name="name" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent">
+                                </div>
+                                <div>
+                                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                                    <input type="email" id="email" name="email" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent">
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label for="subject" class="block text-sm font-medium text-gray-700 mb-1">Subject</label>
+                                <input type="text" id="subject" name="subject" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent">
+                            </div>
+                            
+                            <div>
+                                <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message</label>
+                                <textarea id="message" name="message" rows="5" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"></textarea>
+                            </div>
+                            
+                            <button type="submit" class="w-full px-8 py-3 bg-black text-white font-medium rounded-md hover:bg-gray-800 transition duration-300">
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="py-12 bg-black text-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <h3 class="text-2xl font-bold">Lia Huang</h3>
+                    <p class="text-gray-400 mt-2">
+                      一位致力于在项目统筹与团队赋能中，交付标杆案例的多维度活动管理人
+                    </p>
+                </div>
+                
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                        <i class="fa fa-behance text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                        <i class="fa fa-dribbble text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                        <i class="fa fa-instagram text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                        <i class="fa fa-linkedin text-xl"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400 text-sm">
+                <p>© 2026 Lia Huang. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 回到顶部按钮 -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 bg-black text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg opacity-0 invisible transition-all duration-300">
+        <i class="fa fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // 页面加载完成后执行
+        document.addEventListener('DOMContentLoaded', function() {
+            // 移动端菜单切换
+            const menuToggle = document.getElementById('menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            menuToggle.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            // 平滑滚动
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // 关闭移动菜单（如果打开）
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80, // 考虑导航栏高度
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // 导航栏滚动效果
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('bg-white', 'shadow-md');
+                    navbar.classList.remove('bg-opacity-95');
+                } else {
+                    navbar.classList.remove('shadow-md');
+                    navbar.classList.add('bg-opacity-95');
+                }
+            });
+            
+            // 回到顶部按钮
+            const backToTopButton = document.getElementById('back-to-top');
+            
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 300) {
+                    backToTopButton.classList.remove('opacity-0', 'invisible');
+                    backToTopButton.classList.add('opacity-100', 'visible');
+                } else {
+                    backToTopButton.classList.add('opacity-0', 'invisible');
+                    backToTopButton.classList.remove('opacity-100', 'visible');
+                }
+            });
+            
+            backToTopButton.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // 滚动动画
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const fadeInOnScroll = function() {
+                fadeElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (elementTop < windowHeight - 100) {
+                        element.classList.add('active');
+                    }
+                });
+            };
+            
+            // 初始检查
+            fadeInOnScroll();
+            
+            // 滚动时检查
+            window.addEventListener('scroll', fadeInOnScroll);
+            
+            // 使用 GSAP 添加更复杂的动画
+            if (typeof gsap !== 'undefined') {
+                // Hero 区域动画
+                gsap.from('#home h1', {
+                    opacity: 0,
+                    y: 50,
+                    duration: 1,
+                    delay: 0.2
+                });
+                
+                gsap.from('#home p', {
+                    opacity: 0,
+                    y: 30,
+                    duration: 1,
+                    delay: 0.5
+                });
+                
+                gsap.from('#home .flex', {
+                    opacity: 0,
+                    y: 20,
+                    duration: 1,
+                    delay: 0.8
+                });
+                
+                // 作品卡片动画
+                gsap.utils.toArray('.work-card').forEach((card, i) => {
+                    gsap.from(card, {
+                        scrollTrigger: {
+                            trigger: card,
+                            start: 'top bottom-=100',
+                            toggleActions: 'play none none none'
+                        },
+                        opacity: 0,
+                        y: 50,
+                        duration: 0.8,
+                        delay: i * 0.1
+                    });
+                });
+            }
+            
+            // 表单提交处理
+            const contactForm = document.getElementById('contact-form');
+            
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // 获取表单数据
+                    const formData = new FormData(contactForm);
+                    const formDataObject = {};
+                    
+                    formData.forEach((value, key) => {
+                        formDataObject[key] = value;
+                    });
+                    
+                    // 在实际应用中，这里会发送数据到服务器
+                    // 这里仅做演示，显示提交成功消息
+                    alert('Message sent successfully!');
+                    contactForm.reset();
+                });
+            }
+        });
+    </script>
+
+
+</body></html>
